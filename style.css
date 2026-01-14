@@ -1,0 +1,104 @@
+/* Basic Reset */
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+/* Parallax background image with fixed attachment */
+    background-image: 
+        linear-gradient(rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6)), /* Transparent gradient overlay */
+        url('../images/Planetary-Forest-Background.jpg'); /* Replace with your parallax image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Parallax effect */
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Profile Picture Styling */
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Link Button Styling */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.link-btn {
+    display: flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Center content horizontally */
+    background: linear-gradient(135deg, #f6f8fa, #d9e2ec); /* Light subtle gradient */
+    color: #333;
+    padding: 15px 20px; /* Add horizontal padding for icons */
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    gap: 10px; /* Space between icon and text */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft drop shadow */
+}
+
+.link-btn:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2); /* Vibrant gradient on hover */
+/*  background-color: transparent; */
+    color: white;
+    border: 2px solid white;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(102, 126, 234, 0.6); /* Stronger colored shadow on hover */
+}
+
+.icon {
+    width: 20px; /* Icon size */
+    height: 20px;
+    object-fit: contain;
+}
+
+.left-icon {
+    margin-right: 5px; /* Extra spacing on right side of left icon */
+}
+
+.right-icon {
+    margin-left: 5px; /* Extra spacing on left side of right icon */
+}
+
+.extra-top-space {
+    margin-top: 50px; /* Adjust spacing as needed */
+}
