@@ -1,104 +1,232 @@
 /* Basic Reset */
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-/* Parallax background image with fixed attachment */
-    background-image: 
-        linear-gradient(rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6)), /* Transparent gradient overlay */
-        url('../images/Planetary-Forest-Background.jpg'); /* Replace with your parallax image URL */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Parallax effect */
+  /* Parallax background image with fixed attachment */
+  background-image:
+    linear-gradient(rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6)),
+    url('../images/Planetary-Forest-Background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+  padding: 20px;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: white;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+/* Prevent background scroll while modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Page wrapper so we can blur everything behind the modal */
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.page.is-blurred {
+  filter: blur(10px);
+  transform: scale(0.995);
+  transition: filter 250ms ease, transform 250ms ease;
+}
+
+/* Smooth transition for blur toggle */
+.page {
+  transition: filter 250ms ease, transform 250ms ease;
 }
 
 .container {
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
 /* Profile Picture Styling */
 .profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid white;
-    object-fit: cover;
-    margin-bottom: 15px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 15px;
 }
 
 h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 p {
-    font-size: 16px;
-    margin-bottom: 30px;
-    opacity: 0.9;
+  font-size: 16px;
+  margin-bottom: 30px;
+  opacity: 0.9;
 }
 
-/* Link Button Styling */
 .links {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow: visible;
 }
 
 .link-btn {
-    display: flex; /* Use flexbox to align items horizontally */
-    align-items: center; /* Vertically center */
-    justify-content: center; /* Center content horizontally */
-    background: linear-gradient(135deg, #f6f8fa, #d9e2ec); /* Light subtle gradient */
-    color: #333;
-    padding: 15px 20px; /* Add horizontal padding for icons */
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    gap: 10px; /* Space between icon and text */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft drop shadow */
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: bold;
+
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #f6f8fa, #d9e2ec);
+  color: #333;
+
+  border: 2px solid transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  position: relative; /* for layering on hover */
+  transform: scale(1);
+  transform-origin: center;
+  transition: all 0.3s ease;
 }
 
 .link-btn:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2); /* Vibrant gradient on hover */
-/*  background-color: transparent; */
-    color: white;
-    border: 2px solid white;
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(102, 126, 234, 0.6); /* Stronger colored shadow on hover */
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: 2px solid white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(102, 126, 234, 0.6);
 }
 
+.link-btn:active {
+  transform: scale(1.02);
+}
+
+/* Icon styling */
 .icon {
-    width: 20px; /* Icon size */
-    height: 20px;
-    object-fit: contain;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .left-icon {
-    margin-right: 5px; /* Extra spacing on right side of left icon */
+  margin-right: 5px;
 }
 
 .right-icon {
-    margin-left: 5px; /* Extra spacing on left side of right icon */
+  margin-left: 5px;
 }
 
 .extra-top-space {
-    margin-top: 50px; /* Adjust spacing as needed */
+  margin-top: 50px;
+}
+
+/* =========================
+Modal / Overlay
+========================= */
+
+.modal-overlay {
+  position: fixed;
+  display: grid;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  z-index: 999;
+  inset: 0;
+  place-items: center;
+}
+
+.modal {
+  width: min(720px, 100%);
+  border-radius: 22px;
+  padding: 22px;
+  color: #f7f7fb;
+
+  /* glass effect */
+  background: rgba(25, 20, 35, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.45);
+}
+
+.modal h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.modal p {
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+/* Side-by-side options */
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.option-btn {
+  display: grid;
+  gap: 6px;
+  padding: 16px 14px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: #0e0e14;
+  font-weight: 800;
+
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(230, 235, 255, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(102, 126, 234, 0.35);
+  filter: saturate(1.05);
+}
+
+.option-btn:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+.option-sub {
+  font-weight: 700;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Mobile: stack options */
+@media (max-width: 520px) {
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ensure modal overlay is hidden when hidden attribute is present */
+.modal-overlay[hidden] {
+  display: none !important;
 }
