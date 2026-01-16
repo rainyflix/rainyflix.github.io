@@ -1,58 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Links</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="page" id="page">
     <div class="container">
-        <!-- Profile Picture -->
-        <img src="https://pbs.twimg.com/profile_images/1901808221184028672/0sXcYzsT.jpg" alt="Profile Picture" class="profile-img">
-        
-        <!-- Name -->
-        <h1>@RainyFlix</h1>
-        
-        <!-- Bio -->
-        <p>YouTuber | Photographer | Coding | Fitness</p>
+      <!-- Profile Picture -->
+      <img src="https://pbs.twimg.com/profile_images/2011819432318836737/naFpvNf5_400x400.jpg" alt="Profile Picture" class="profile-img" />
 
-        <!-- Links -->
-<div class="links">
-    	<a href="https://www.youtube.com/@RainyflixYT" target="_blank" class="link-btn">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Left Icon" class="icon left-icon">
-        YouTube
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Right Icon" class="icon right-icon">
-    	</a>
+      <!-- Name -->
+      <h1>@RainyFlix</h1>
 
-   	<a href="https://www.instagram.com/rainyflix" target="_blank" class="link-btn">
-        <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="Left Icon" class="icon left-icon">
-        Instagram
-        <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="Right Icon" class="icon right-icon">
-    	</a>
+      <!-- Bio -->
+      <p>YouTuber | Photographer | Coding | Fitness</p>
 
-	<a href="https://onlyfans.com/rainyfitness" target="_blank" class="link-btn">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/onlyfans.webp" alt="Left Icon" class="icon left-icon">
-        Fitness Blog
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/webp/onlyfans.webp" alt="Right Icon" class="icon right-icon">
-   	</a>
-
-	<a href="https://www.youtube.com/@RainyScapeYT" target="_blank" class="link-btn extra-top-space">
-        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Left Icon" class="icon left-icon">
-	YouTube ~ RuneScape Videos
-        <img src="https://i.imgur.com/TkiKjWM.png" alt="Right Icon" class="icon right-icon">
-	<img src="https://cdn2.steamgriddb.com/icon_thumb/6c8349cc7260ae62e3b1396831a8398f.png" alt="Right Icon" class="icon right-icon">
+      <!-- Main Links -->
+      <div class="links">
+        <a href="https://www.youtube.com/@RainyflixYT" target="_blank" class="link-btn">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Left Icon" class="icon left-icon" />
+          YouTube
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Right Icon" class="icon right-icon" />
         </a>
 
-	<a href="https://x.com/Rainyflix" target="_blank" class="link-btn">
-        <img src="https://cdn-icons-png.flaticon.com/128/12107/12107562.png" alt="Left Icon" class="icon left-icon">
-	X ~ My RuneScape Blog
-        <img src="https://i.imgur.com/TkiKjWM.png" alt="Right Icon" class="icon right-icon">
-	<img src="https://cdn2.steamgriddb.com/icon_thumb/6c8349cc7260ae62e3b1396831a8398f.png" alt="Right Icon" class="icon right-icon">
+        <a href="https://www.instagram.com/rainyflix" target="_blank" class="link-btn">
+          <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="Left Icon" class="icon left-icon" />
+          Instagram
+          <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="Right Icon" class="icon right-icon" />
         </a>
 
-            <a href="mailto:your@email.com" class="link-btn">Email Me</a>
-        </div>
+        <a href="https://www.tiktok.com/@rainyflix" target="_blank" class="link-btn">
+          <img src="https://cdn-icons-png.flaticon.com/128/3046/3046121.png" alt="Left Icon" class="icon left-icon" />
+          TikTok
+          <img src="https://cdn-icons-png.flaticon.com/128/3046/3046121.png" alt="Right Icon" class="icon right-icon" />
+        </a>
+
+        <button type="button" target="_blank" class="link-btn" id="fitnessBtn" aria-haspopup="dialog" aria-controls="fitnessModal">
+          <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/onlyfans.png" alt="Left Icon" class="icon left-icon" />
+          Fitness Blog
+          <img src="https://cdn.worldvectorlogo.com/logos/fansly.svg" alt="Right Icon" class="icon right-icon" />
+        </button>
+
+        <!-- RuneScape Links -->
+        <a href="https://x.com/Rainyflix" target="_blank" class="link-btn extra-top-space">
+          <img src="https://cdn-icons-png.flaticon.com/128/12107/12107562.png" alt="Left Icon" class="icon left-icon" />
+          X ~ My RuneScape Blog
+          <img src="https://i.imgur.com/TkiKjWM.png" alt="Right Icon" class="icon right-icon" />
+          <img src="https://cdn2.steamgriddb.com/icon_thumb/6c8349cc7260ae62e3b1396831a8398f.png" alt="Right Icon" class="icon right-icon" />
+        </a>
+
+        <a href="https://www.youtube.com/@RainyScapeYT" target="_blank" class="link-btn">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Left Icon" class="icon left-icon" />
+          RainyScape YouTube
+          <img src="https://i.imgur.com/TkiKjWM.png" alt="Right Icon" class="icon right-icon" />
+          <img src="https://cdn2.steamgriddb.com/icon_thumb/6c8349cc7260ae62e3b1396831a8398f.png" alt="Right Icon" class="icon right-icon" />
+        </a>
+
+        <!-- Business Links -->
+        <a href="mailto:your@email.com" target="_blank" class="link-btn extra-top-space">Business Inquiries & Collabs</a>
+      </div>
     </div>
+  </div>
+
+  <!-- Fitness Overlay / Modal -->
+  <div class="modal-overlay" id="fitnessOverlay" hidden>
+    <div
+      class="modal"
+      id="fitnessModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="fitnessTitle"
+      aria-describedby="fitnessDesc"
+    >
+      <h2 id="fitnessTitle">Pick a fitness destination</h2>
+      <p id="fitnessDesc">Choose your preferred site. Click outside to close.</p>
+
+      <div class="modal-actions">
+        <a class="option-btn" href="https://onlyfans.com/rainyfitness" target="_blank" rel="noopener">
+          OnlyFans Fitness Blog
+          <span class="option-sub">onlyfans.com/rainyfitness</span>
+        </a>
+
+        <a class="option-btn" href="https://example.com" target="_blank" rel="noopener">
+          Fansly Fitness Blog
+          <span class="option-sub">example.com</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fitnessBtn = document.getElementById('fitnessBtn');
+    const overlay = document.getElementById('fitnessOverlay');
+    const modal = document.getElementById('fitnessModal');
+    const page = document.getElementById('page');
+
+    function openFitnessModal() {
+      overlay.hidden = false;
+      document.body.classList.add('modal-open');
+      page.classList.add('is-blurred');
+
+      const firstFocusable = modal.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) firstFocusable.focus();
+    }
+
+    function closeFitnessModal() {
+      overlay.hidden = true;
+      document.body.classList.remove('modal-open');
+      page.classList.remove('is-blurred');
+    }
+
+    fitnessBtn.addEventListener('click', openFitnessModal);
+
+    // Click outside closes modal
+    overlay.addEventListener('click', (e) => {
+      if (!modal.contains(e.target)) closeFitnessModal();
+    });
+
+    // ESC closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.hidden) closeFitnessModal();
+    });
+
+    // Prevent clicks inside modal from bubbling to overlay
+    modal.addEventListener('click', (e) => e.stopPropagation());
+  </script>
 </body>
 </html>
