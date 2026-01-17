@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Links</title>
+
+  <!-- Title of the tab -->
+  <title>RainyFlix Links</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="../images/Raindrop.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+      <!-- Copy URL Button -->
+      <button id="copyButton" title="Share Website Link" aria-label="Copy page URL" class="copy-url-btn">
+      <span class="icon clipboard-icon">📋</span>
+      <span class="icon checkmark-icon">✅</span>
+      </button>
+
   <div class="page" id="page">
     <div class="container">
       <!-- Profile Picture -->
@@ -38,7 +53,7 @@
           <img src="https://cdn-icons-png.flaticon.com/128/3046/3046121.png" alt="Right Icon" class="icon right-icon" />
         </a>
 
-        <button type="button" target="_blank" class="link-btn" id="fitnessBtn" aria-haspopup="dialog" aria-controls="fitnessModal">
+        <button type="button" class="link-btn" id="fitnessBtn" aria-haspopup="dialog" aria-controls="fitnessModal">
           <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/onlyfans.png" alt="Left Icon" class="icon left-icon" />
           Fitness Blog
           <img src="https://cdn.worldvectorlogo.com/logos/fansly.svg" alt="Right Icon" class="icon right-icon" />
@@ -93,41 +108,7 @@
     </div>
   </div>
 
-  <script>
-    const fitnessBtn = document.getElementById('fitnessBtn');
-    const overlay = document.getElementById('fitnessOverlay');
-    const modal = document.getElementById('fitnessModal');
-    const page = document.getElementById('page');
-
-    function openFitnessModal() {
-      overlay.hidden = false;
-      document.body.classList.add('modal-open');
-      page.classList.add('is-blurred');
-
-      const firstFocusable = modal.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
-      if (firstFocusable) firstFocusable.focus();
-    }
-
-    function closeFitnessModal() {
-      overlay.hidden = true;
-      document.body.classList.remove('modal-open');
-      page.classList.remove('is-blurred');
-    }
-
-    fitnessBtn.addEventListener('click', openFitnessModal);
-
-    // Click outside closes modal
-    overlay.addEventListener('click', (e) => {
-      if (!modal.contains(e.target)) closeFitnessModal();
-    });
-
-    // ESC closes modal
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !overlay.hidden) closeFitnessModal();
-    });
-
-    // Prevent clicks inside modal from bubbling to overlay
-    modal.addEventListener('click', (e) => e.stopPropagation());
-  </script>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
