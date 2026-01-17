@@ -34,19 +34,15 @@ body.modal-open {
   width: 100%;
   display: flex;
   justify-content: center;
+  transition: filter 250ms ease, transform 250ms ease;
 }
 
 .page.is-blurred {
   filter: blur(10px);
   transform: scale(0.995);
-  transition: filter 250ms ease, transform 250ms ease;
 }
 
-/* Smooth transition for blur toggle */
-.page {
-  transition: filter 250ms ease, transform 250ms ease;
-}
-
+/* Container */
 .container {
   text-align: center;
   width: 100%;
@@ -105,7 +101,7 @@ p {
   border: 2px solid transparent;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-  position: relative; /* for layering on hover */
+  position: relative;
   transform: scale(1);
   transform-origin: center;
   transition: all 0.3s ease;
@@ -142,10 +138,7 @@ p {
   margin-top: 50px;
 }
 
-/* =========================
-Modal / Overlay
-========================= */
-
+/* Modal / Overlay */
 .modal-overlay {
   position: fixed;
   display: grid;
@@ -229,4 +222,75 @@ Modal / Overlay
 /* Ensure modal overlay is hidden when hidden attribute is present */
 .modal-overlay[hidden] {
   display: none !important;
+}
+
+/* Copy URL Button Styling */
+.copy-url-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #667eea;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.6);
+  transition: background-color 0.3s ease;
+  z-index: 10;
+  overflow: hidden;
+  display: block;
+}
+
+.copy-url-btn:hover {
+  background-color: #764ba2;
+}
+
+.copy-url-btn.is-blurred {
+  filter: blur(10px);
+  transform: scale(0.995);
+  transition: filter 250ms ease, transform 250ms ease;
+}
+
+/* Icon positioning and animation */
+.copy-url-btn .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+
+/* Clipboard icon visible by default */
+.clipboard-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
+}
+
+/* Checkmark icon hidden by default */
+.checkmark-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  z-index: 1;
+  color: #4CAF50; /* Green checkmark */
+}
+
+/* When copied, toggle icons */
+.copy-url-btn.copied .clipboard-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  z-index: 1;
+}
+
+.copy-url-btn.copied .checkmark-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 2;
 }
