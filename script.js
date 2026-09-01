@@ -51,7 +51,9 @@ function closeFitnessModal() {
 }
 
 // Event listeners for modal open/close
-fitnessBtn.addEventListener('click', openFitnessModal);
+if (fitnessBtn) {
+  fitnessBtn.addEventListener('click', openFitnessModal);
+}
 
 overlay.addEventListener('click', (e) => {
   if (!modal.contains(e.target)) closeFitnessModal();
