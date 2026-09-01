@@ -64,16 +64,19 @@ document.addEventListener('keydown', (e) => {
 modal.addEventListener('click', (e) => e.stopPropagation());
 
 // Copy URL button functionality
-copyButton.addEventListener('click', () => {
-  // Explicit user confirmation to reduce suspicion by blockers
-  if (confirm('Do you want to copy the current page URL to your clipboard?')) {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      copyButton.classList.add('copied');
-      setTimeout(() => {
-        copyButton.classList.remove('copied');
-      }, 1500);
-    }).catch(err => {
-      alert('Failed to copy URL: ' + err);
-    });
-  }
-});
+if (copyButton) {
+  copyButton.addEventListener('click', () => {
+    if (confirm('Do you want to copy the current page URL to your clipboard?')) {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        copyButton.classList.add('copied');
+        setTimeout(() => {
+          copyButton.classList.remove('copied');
+        }, 1500);
+      }).catch(err => {
+        alert('Failed to copy URL: ' + err);
+      });
+    }
+  });
+} else {
+  console.error('Copy button not found');
+}
