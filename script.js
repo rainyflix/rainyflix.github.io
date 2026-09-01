@@ -30,6 +30,8 @@ function getScrollbarWidth() {
 
 // Open modal function
 function openFitnessModal() {
+  if (!overlay || !modal || !page || !copyButton) return;
+
   overlay.hidden = false;
   const scrollbarWidth = getScrollbarWidth();
   document.body.style.paddingRight = scrollbarWidth + 'px';
@@ -43,6 +45,8 @@ function openFitnessModal() {
 
 // Close modal function
 function closeFitnessModal() {
+  if (!overlay || !modal || !page || !copyButton) return;
+
   overlay.hidden = true;
   document.body.style.paddingRight = '';
   document.body.classList.remove('modal-open');
@@ -55,15 +59,17 @@ if (fitnessBtn) {
   fitnessBtn.addEventListener('click', openFitnessModal);
 }
 
-overlay.addEventListener('click', (e) => {
-  if (!modal.contains(e.target)) closeFitnessModal();
-});
+if (overlay && modal) {
+  overlay.addEventListener('click', (e) => {
+    if (!modal.contains(e.target)) closeFitnessModal();
+  });
+
+  modal.addEventListener('click', (e) => e.stopPropagation());
+}
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !overlay.hidden) closeFitnessModal();
+  if (e.key === 'Escape' && overlay && !overlay.hidden) closeFitnessModal();
 });
-
-modal.addEventListener('click', (e) => e.stopPropagation());
 
 // Copy URL button functionality
 if (copyButton) {
