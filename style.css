@@ -13,6 +13,7 @@ html, body {
 }
 
 body {
+  /* Parallax background image with fixed attachment */
   background-image:
     linear-gradient(rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6)),
     url('../images/Planetary-Forest-Background.jpg');
@@ -30,10 +31,12 @@ body {
   align-items: flex-start;
 }
 
+/* Prevent background scroll while modal is open */
 body.modal-open {
   overflow: hidden;
 }
 
+/* Page wrapper so we can blur everything behind the modal */
 .page {
   width: 100%;
   display: flex;
@@ -86,6 +89,42 @@ p {
   flex-direction: column;
   gap: 15px;
   overflow: visible;
+}
+
+.small-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0 24px;
+}
+
+.small-btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f6f8fa, #d9e2ec);
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.small-btn:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.6);
+  transform: scale(1.05);
+}
+
+.small-btn:active {
+  transform: scale(1.02);
 }
 
 .link-btn {
@@ -303,7 +342,7 @@ p {
 
 #BouncingRainyPaintStyle {
   width: 44px;
-  height: 44px;
+  height: auto;
   display: block;
   transform-origin: bottom center;
   will-change: transform;
