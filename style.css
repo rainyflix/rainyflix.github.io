@@ -1,3 +1,5 @@
+/* style.css */
+
 /* Basic Reset */
 * {
   margin: 0;
@@ -6,8 +8,11 @@
   font-family: Arial, sans-serif;
 }
 
+html, body {
+  width: 100%;
+}
+
 body {
-  /* Parallax background image with fixed attachment */
   background-image:
     linear-gradient(rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6)),
     url('../images/Planetary-Forest-Background.jpg');
@@ -16,20 +21,19 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   color: white;
   padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* Prevent background scroll while modal is open */
 body.modal-open {
   overflow: hidden;
 }
 
-/* Page wrapper so we can blur everything behind the modal */
 .page {
   width: 100%;
   display: flex;
@@ -42,14 +46,13 @@ body.modal-open {
   transform: scale(0.995);
 }
 
-/* Container */
 .container {
   text-align: center;
   width: 100%;
   max-width: 400px;
+  margin: 40px auto 20px;
 }
 
-/* Profile Picture Styling */
 .profile-img {
   width: 150px;
   height: 150px;
@@ -70,7 +73,15 @@ p {
   opacity: 0.9;
 }
 
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .links {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -119,11 +130,11 @@ p {
   transform: scale(1.02);
 }
 
-/* Icon styling */
 .icon {
   width: 20px;
   height: 20px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .left-icon {
@@ -154,8 +165,6 @@ p {
   border-radius: 22px;
   padding: 22px;
   color: #f7f7fb;
-
-  /* glass effect */
   background: rgba(25, 20, 35, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(10px);
@@ -173,7 +182,6 @@ p {
   opacity: 0.9;
 }
 
-/* Side-by-side options */
 .modal-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -212,14 +220,6 @@ p {
   opacity: 0.7;
 }
 
-/* Mobile: stack options */
-@media (max-width: 520px) {
-  .modal-actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Ensure modal overlay is hidden when hidden attribute is present */
 .modal-overlay[hidden] {
   display: none !important;
 }
@@ -238,7 +238,7 @@ p {
   font-size: 22px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(102, 126, 234, 0.6);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, filter 250ms ease, transform 250ms ease;
   z-index: 10;
   overflow: hidden;
   display: block;
@@ -251,10 +251,8 @@ p {
 .copy-url-btn.is-blurred {
   filter: blur(10px);
   transform: scale(0.995);
-  transition: filter 250ms ease, transform 250ms ease;
 }
 
-/* Icon positioning and animation */
 .copy-url-btn .icon {
   position: absolute;
   top: 50%;
@@ -267,22 +265,19 @@ p {
   text-align: center;
 }
 
-/* Clipboard icon visible by default */
 .clipboard-icon {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   z-index: 2;
 }
 
-/* Checkmark icon hidden by default */
 .checkmark-icon {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.5);
   z-index: 1;
-  color: #4CAF50; /* Green checkmark */
+  color: #4CAF50;
 }
 
-/* When copied, toggle icons */
 .copy-url-btn.copied .clipboard-icon {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.5);
@@ -293,4 +288,95 @@ p {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
   z-index: 2;
+}
+
+/* Bouncing character */
+#bouncingCharacterContainer {
+  margin-top: 40px;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+#BouncingRainyPaintStyle {
+  width: 44px;
+  height: 44px;
+  display: block;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+/* Bottom stays visually anchored, only top "jiggles" vertically */
+@keyframes topJiggle {
+  0%   { transform: scaleY(1) translateY(0); }
+  20%  { transform: scaleY(1.08) translateY(-2px); }
+  40%  { transform: scaleY(0.94) translateY(0); }
+  60%  { transform: scaleY(1.05) translateY(-1px); }
+  80%  { transform: scaleY(0.97) translateY(0); }
+  100% { transform: scaleY(1) translateY(0); }
+}
+
+.bounce {
+  animation: topJiggle 0.55s ease;
+}
+
+/* Footer */
+footer#footer {
+  width: 100%;
+  margin-top: 2px;
+  padding: 10px 0 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.footer-content {
+  width: 100%;
+}
+
+.footer-content p {
+  margin-bottom: 8px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.footer-nav a {
+  color: rgba(255, 255, 255, 0.84);
+  text-decoration: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: white;
+  opacity: 1;
+}
+
+.footer-nav span {
+  opacity: 0.6;
+}
+
+@media (max-width: 520px) {
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    margin-top: 60px;
+  }
+
+  .link-btn {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
 }
