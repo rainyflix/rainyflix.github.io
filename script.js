@@ -1,9 +1,12 @@
+// script.js
+
 // Get elements
 const fitnessBtn = document.getElementById('fitnessBtn');
 const overlay = document.getElementById('fitnessOverlay');
 const modal = document.getElementById('fitnessModal');
 const page = document.getElementById('page');
 const copyButton = document.getElementById('copyButton');
+const bouncingCharacter = document.getElementById('BouncingRainyPaintStyle');
 
 // Utility to get scrollbar width
 function getScrollbarWidth() {
@@ -22,7 +25,6 @@ function getScrollbarWidth() {
   scrollDiv.appendChild(innerDiv);
 
   const scrollbarWidth = scrollDiv.offsetWidth - innerDiv.offsetWidth;
-
   document.body.removeChild(scrollDiv);
 
   return scrollbarWidth;
@@ -73,18 +75,36 @@ document.addEventListener('keydown', (e) => {
 
 // Copy URL button functionality
 if (copyButton) {
-  copyButton.addEventListener('click', () => {
-    if (confirm('Do you want to copy the current page URL to your clipboard?')) {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        copyButton.classList.add('copied');
-        setTimeout(() => {
-          copyButton.classList.remove('copied');
-        }, 1500);
-      }).catch(err => {
-        alert('Failed to copy URL: ' + err);
-      });
+  copyButton.addEventListener('click', async () => {
+    const shouldCopy = confirm('Do you want to copy the current page URL to your clipboard?');
+    if (!shouldCopy) return;
+
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      copyButton.classList.add('copied');
+      setTimeout(() => {
+        copyButton.classList.remove('copied');
+      }, 1500);
+    } catch (err) {
+      alert('Failed to copy URL: ' + err);
     }
   });
 } else {
   console.error('Copy button not found');
+}
+
+// Bouncing character click animation
+if (bouncingCharacter) {
+  bouncingCharacter.addEventListener('click', () => {
+    if (bouncingCharacter.classList.contains('bounce')) return;
+
+    bouncingCharacter.classList.add('bounce');
+    bouncingCharacter.addEventListener(
+      'animationend',
+      () => {
+        bouncingCharacter.classList.remove('bounce');
+      },
+      { once: true }
+    );
+  });
 }
