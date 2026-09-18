@@ -95,36 +95,37 @@ p {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin: 12px 0 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
 }
 
 .small-btn {
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 999px;
   background: linear-gradient(135deg, #f6f8fa, #d9e2ec);
   color: #333;
   text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+  border: 2px solid transparent;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, color 0.28s ease;
 }
 
-.small-btn:hover {
+.small-btn:hover,
+.small-btn:focus-visible {
   background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.6);
-  transform: scale(1.05);
+  color: #fff;
+  box-shadow: 0 10px 18px rgba(102, 126, 234, 0.42);
+  transform: translateY(-1px) scale(1.04);
+  outline: none;
 }
 
-.small-btn:active {
-  transform: scale(1.02);
+.small-btn.is-active {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .link-btn {
