@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rainyflix Photography</title>
+
+  <link rel="icon" href="../images/Raindrop.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="../images/Raindrop.png" type="image/png" />
+  <link rel="icon" sizes="192x192" href="../images/Raindrop.png" type="image/png" />
+
+  <!-- Common styles -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Photography page styles -->
+  <link rel="stylesheet" href="photography.css" />
+</head>
+<body>
+  <div class="page" id="page">
+    <main class="photography-container">
+      <header class="topbar">
+        <div class="eyebrow">@Rainyflix</div>
+
+        <nav class="small-buttons" aria-label="Section navigation">
+          <a href="index.html" class="small-btn">Links</a>
+          <a href="photography.html" class="small-btn is-active" aria-current="page">Photography</a>
+        </nav>
+      </header>
+
+<section class="hero-intro-wrapper">
+    <section class="hero-grid">
+    <article class="hero-photo reveal">
+    <div class="frame">
+      <img src="../images/main-photo.jpg" alt="Nick Reflected Photographer" />
+    </div>
+    <div class="hero-caption">
+      <h2>Atmosphere, light, and stillness.</h2>
+      <p>A curated gallery page designed for soft cinematic photography, nature studies, and moody visual storytelling.</p>
+    </div>
+  </article>
+</section>
+
+        <article class="intro-panel reveal" style="animation-delay:0.1s;">
+          <span class="kicker">Photography Portfolio</span>
+          <h1>Collected frames from quiet worlds.</h1>
+          <p>
+            This page is built as a portfolio-style gallery using the same dreamy background and compact navigation buttons as your main page.
+            Feature a hero image, introduce your style, and let visitors open individual pieces in a focused lightbox without losing the soft blurred atmosphere of the site.
+          </p>
+          <p>
+            Replace any of the sample SVG artwork blocks with your own photos later by swapping each inline graphic for an actual image element if you want.
+          </p>
+        </article>
+      </section>
+
+      <section class="gallery-section">
+        <div class="gallery-head reveal" style="animation-delay:0.16s;">
+          <h3>Selected Works</h3>
+          <span>Click any preview to enlarge</span>
+        </div>
+
+        <div class="thumb-grid">
+         <button class="thumb" type="button" data-title="Title" data-subtitle="Subtitle" data-art="art-1" aria-label="Open Title image">
+
+  <img src="../images/moss-tree.jpg" alt="Title thumbnail" style="width: 100%; height: 100%; object-fit: cover; border-radius: 22px;" />
+  <div class="thumb-label">
+    <strong>Title</strong>
+    <span>Subtitle</span>
+  </div>
+</button>
+
+          <!-- Add more thumbnails similarly -->
+        </div>
+
+        <div class="gallery-footer reveal" style="animation-delay:0.22s;">
+        <!-- Footer -->
+        <footer id="footer">
+          <div class="footer-content">
+            <p>© 2026 Rainyflix. All rights reserved.</p>
+
+
+          </div>
+        </footer>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="imageOverlay" hidden>
+    <div class="lightbox-modal" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-describedby="lightboxDesc">
+      <button class="close-lightbox" id="closeLightbox" type="button" aria-label="Close expanded image">×</button>
+
+      <figure class="lightbox-figure" id="lightboxFigure">
+        <!-- Enlarged image or SVG inserted here -->
+      </figure>
+
+      <div class="lightbox-meta">
+        <div>
+          <strong id="lightboxTitle">Expanded image</strong>
+          <span id="lightboxDesc">Portfolio preview</span>
+        </div>
+        <span>Press Esc to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Common scripts -->
+  <script src="script.js"></script>
+  <!-- Photography page scripts -->
+  <script src="photography.js"></script>
+</body>
+</html>
