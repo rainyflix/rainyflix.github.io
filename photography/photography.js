@@ -1,9 +1,9 @@
 // photography.js
 
-// Element references
-const overlay = document.getElementById('imageOverlay');
-const modal = document.getElementById('imageModal');
-const page = document.getElementById('page');
+// Element references with renamed variables to avoid conflicts
+const photoOverlay = document.getElementById('imageOverlay');
+const photoModal = document.getElementById('imageModal');
+const photoPage = document.getElementById('page');
 const lightboxFigure = document.getElementById('lightboxFigure');
 const lightboxTitle = document.getElementById('lightboxTitle');
 const lightboxDesc = document.getElementById('lightboxDesc');
@@ -12,7 +12,7 @@ const thumbs = document.querySelectorAll('.thumb');
 
 // Artwork library: keys map to large image HTML strings or SVGs
 const artworkLibrary = {
-  'art-1': `<img src="../images/moss-tree.jpg" alt="Title large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-1': `<img src="../images/moss-tree.jpg" alt="A moss-covered tree" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-2': `<img src="path/to/your-image2-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-3': `<img src="path/to/your-image3-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-4': `<img src="path/to/your-image4-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
@@ -44,40 +44,58 @@ function getScrollbarWidth() {
   return scrollbarWidth;
 }
 
-// Open modal and display selected artwork
 function openLightbox(button) {
-  if (!overlay || !modal || !page) return;
+  if (!photoOverlay || !photoModal || !photoPage) return;
 
   const title = button.dataset.title || 'Expanded image';
   const subtitle = button.dataset.subtitle || 'Portfolio preview';
   const artKey = button.dataset.art || 'art-1';
+  const purchaseLink = button.dataset.purchaseLink || '';
 
   lightboxTitle.textContent = title;
   lightboxDesc.textContent = subtitle;
   lightboxFigure.innerHTML = artworkLibrary[artKey] || artworkLibrary['art-1'];
 
-  overlay.hidden = false;
+  const purchaseButton = document.getElementById('purchaseButton');
+  const purchaseStatus = document.getElementById('purchaseStatus');
 
-  // Prevent layout shift by compensating for scrollbar width
+  if (purchaseLink.trim() !== '') {
+    purchaseButton.disabled = false;
+    purchaseStatus.textContent = 'Available';
+    purchaseButton.classList.remove('disabled');
+
+    // Update button click to open purchase link
+    purchaseButton.onclick = () => {
+      window.open(purchaseLink, '_blank');
+    };
+  } else {
+    purchaseButton.disabled = true;
+    purchaseStatus.textContent = 'Unavailable';
+    purchaseButton.classList.add('disabled');
+
+    // Remove click handler if unavailable
+    purchaseButton.onclick = null;
+  }
+
+  photoOverlay.hidden = false;
+
   const scrollbarWidth = getScrollbarWidth();
   document.body.style.paddingRight = scrollbarWidth + 'px';
 
-  // Add modal open classes and blur background content
   document.body.classList.add('modal-open');
-  page.classList.add('is-blurred');
+  photoPage.classList.add('is-blurred');
 
-  // Accessibility: focus close button so screen readers know where focus is
   closeLightboxBtn.focus();
 }
 
 // Close modal and restore page state
 function closeModal() {
-  if (!overlay || !page) return;
+  if (!photoOverlay || !photoPage) return;
 
-  overlay.hidden = true;
+  photoOverlay.hidden = true;
   document.body.style.paddingRight = '';
   document.body.classList.remove('modal-open');
-  page.classList.remove('is-blurred');
+  photoPage.classList.remove('is-blurred');
 
   // Clear modal content
   lightboxFigure.innerHTML = '';
@@ -92,21 +110,21 @@ thumbs.forEach((thumb) => {
 closeLightboxBtn.addEventListener('click', closeModal);
 
 // Close modal when clicking outside modal content (on overlay background)
-overlay.addEventListener('click', (e) => {
-  if (e.target === overlay) {
+photoOverlay.addEventListener('click', (e) => {
+  if (e.target === photoOverlay) {
     closeModal();
   }
 });
 
 // Prevent modal close when clicking inside modal content
-modal.addEventListener('click', (e) => e.stopPropagation());
+photoModal.addEventListener('click', (e) => e.stopPropagation());
 
 // Close modal on Escape key press
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !overlay.hidden) {
+  if (e.key === 'Escape' && !photoOverlay.hidden) {
     closeModal();
   }
-})
+});
 
 // IntersectionObserver for reveal animations on scroll
 const revealItems = document.querySelectorAll('.reveal');
