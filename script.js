@@ -8,6 +8,14 @@ const page = document.getElementById('page');
 const copyButton = document.getElementById('copyButton');
 const bouncingCharacter = document.getElementById('BouncingRainyPaintStyle');
 
+document.addEventListener('DOMContentLoaded', () => {
+  const fadeElements = document.querySelectorAll('.fade-in-element');
+  fadeElements.forEach((el, index) => {
+    el.style.animationDelay = `${index * 0.15}s`; // 0.15s delay between each
+    el.classList.add('visible');
+  });
+});
+
 // Utility to get scrollbar width
 function getScrollbarWidth() {
   const scrollDiv = document.createElement('div');
