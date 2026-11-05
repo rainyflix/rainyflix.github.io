@@ -18,7 +18,7 @@ const artworkLibrary = {
   'art-4': `<img src="../images/photography/edinburgh-christmas-market.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-5': `<img src="../images/photography/sunflower-garden.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-6': `<img src="../images/photography/fjord-sunset.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-7': `<img src="../images/photography/bergen-in-summer.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-7': `<img src="../images/photography/festplassen.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-8': `<img src="../images/photography/curious-cat.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-9': `<img src="../images/photography/dry-river-drain.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   'art-10': `<img src="../images/photography/glowing-mushrooms.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
