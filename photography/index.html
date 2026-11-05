@@ -263,8 +263,10 @@
           <div class="footer-content">
             <p>© 2026 Rainyflix. All rights reserved.</p>
 
+
           </div>
         </footer>
+
         </div>
       </section>
     </main>
@@ -273,9 +275,30 @@
   <div class="modal-overlay" id="imageOverlay" hidden>
     <div class="lightbox-modal" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-describedby="lightboxDesc">
       <button class="close-lightbox" id="closeLightbox" type="button" aria-label="Close expanded image">×</button>
+<button
+  class="lightbox-nav lightbox-prev"
+  id="previousImage"
+  type="button"
+  aria-label="View previous photograph"
+  aria-controls="lightboxFigure"
+>
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="m14 5-7 7 7 7" />
+  </svg>
+</button>
 
+<button
+  class="lightbox-nav lightbox-next"
+  id="nextImage"
+  type="button"
+  aria-label="View next photograph"
+  aria-controls="lightboxFigure"
+>
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="m10 5 7 7-7 7" />
+  </svg>
+</button>
       <figure class="lightbox-figure" id="lightboxFigure">
-        <!-- Enlarged image or SVG inserted here -->
       </figure>
 
       <div class="lightbox-meta">
