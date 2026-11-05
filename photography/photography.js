@@ -30,121 +30,179 @@ const artworkLibrary = {
   // Add other artworks similarly...
 };
 
-// Utility: Calculate scrollbar width to avoid layout shift when modal opens
-function getScrollbarWidth() {
-  const scrollDiv = document.createElement('div');
-  scrollDiv.style.visibility = 'hidden';
-  scrollDiv.style.overflow = 'scroll';
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  scrollDiv.style.width = '50px';
-  scrollDiv.style.height = '50px';
-  document.body.appendChild(scrollDiv);
+  const photoThumbList = Array.from(thumbs);
+  const previousImageBtn = document.getElementById('previousImage');
+  const nextImageBtn = document.getElementById('nextImage');
+  const photoPurchaseButton = document.getElementById('purchaseButton');
+  const photoPurchaseStatus = document.getElementById('purchaseStatus');
 
-  const innerDiv = document.createElement('div');
-  innerDiv.style.width = '100%';
-  innerDiv.style.height = '100%';
-  scrollDiv.appendChild(innerDiv);
+  let currentPhotoIndex = -1;
+  let photoReturnFocus = null;
+  let savedPhotoBodyPadding = '';
 
-  const scrollbarWidth = scrollDiv.offsetWidth - innerDiv.offsetWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarWidth;
-}
-
-function openLightbox(button) {
-  if (!photoOverlay || !photoModal || !photoPage) return;
-
-  const title = button.dataset.title || 'Expanded image';
-  const subtitle = button.dataset.subtitle || 'Portfolio preview';
-  const artKey = button.dataset.art || 'art-1';
-  const purchaseLink = button.dataset.purchaseLink || '';
-
-  lightboxTitle.textContent = title;
-  lightboxDesc.textContent = subtitle;
-  lightboxFigure.innerHTML = artworkLibrary[artKey] || artworkLibrary['art-1'];
-
-  const purchaseButton = document.getElementById('purchaseButton');
-  const purchaseStatus = document.getElementById('purchaseStatus');
-
-  if (purchaseLink.trim() !== '') {
-    purchaseButton.disabled = false;
-    purchaseStatus.textContent = 'Available';
-    purchaseButton.classList.remove('disabled');
-
-    // Update button click to open purchase link
-    purchaseButton.onclick = () => {
-      window.open(purchaseLink, '_blank');
-    };
-  } else {
-    purchaseButton.disabled = true;
-    purchaseStatus.textContent = 'Unavailable';
-    purchaseButton.classList.add('disabled');
-
-    // Remove click handler if unavailable
-    purchaseButton.onclick = null;
+  function getScrollbarWidth() {
+    return Math.max(
+      0,
+      window.innerWidth - document.documentElement.clientWidth
+    );
   }
 
-  photoOverlay.hidden = false;
+  // Shared by thumbnail clicks and previous/next navigation.
+  function renderPhoto(button) {
+    const title = button.dataset.title || 'Expanded image';
+    const subtitle = button.dataset.subtitle || 'Portfolio preview';
+    const artKey = button.dataset.art || 'art-1';
+    const purchaseLink = (button.dataset.purchaseLink || '').trim();
 
-  const scrollbarWidth = getScrollbarWidth();
-  document.body.style.paddingRight = scrollbarWidth + 'px';
+    lightboxTitle.textContent = title;
+    lightboxDesc.textContent = subtitle;
+    lightboxFigure.innerHTML =
+      artworkLibrary[artKey] || artworkLibrary['art-1'];
 
-  document.body.classList.add('modal-open');
-  photoPage.classList.add('is-blurred');
+    const expandedImage = lightboxFigure.querySelector('img');
+    if (expandedImage) {
+      expandedImage.alt = button.querySelector('img')?.alt || title;
+    }
 
-  closeLightboxBtn.focus();
-}
+    if (photoPurchaseButton && photoPurchaseStatus) {
+      const available = purchaseLink !== '';
 
-// Close modal and restore page state
-function closeModal() {
-  if (!photoOverlay || !photoPage) return;
+      photoPurchaseButton.disabled = !available;
+      photoPurchaseButton.classList.toggle('disabled', !available);
+      photoPurchaseStatus.textContent = available
+        ? 'Available'
+        : 'Unavailable';
 
-  photoOverlay.hidden = true;
-  document.body.style.paddingRight = '';
-  document.body.classList.remove('modal-open');
-  photoPage.classList.remove('is-blurred');
-
-  // Clear modal content
-  lightboxFigure.innerHTML = '';
-}
-
-// Attach event listeners to thumbnails to open modal
-thumbs.forEach((thumb) => {
-  thumb.addEventListener('click', () => openLightbox(thumb));
-});
-
-// Close modal when clicking close button
-closeLightboxBtn.addEventListener('click', closeModal);
-
-// Close modal when clicking outside modal content (on overlay background)
-photoOverlay.addEventListener('click', (e) => {
-  if (e.target === photoOverlay) {
-    closeModal();
+      photoPurchaseButton.onclick = available
+        ? () => window.open(purchaseLink, '_blank', 'noopener,noreferrer')
+        : null;
+    }
   }
-});
 
-// Prevent modal close when clicking inside modal content
-photoModal.addEventListener('click', (e) => e.stopPropagation());
+  function openLightbox(button) {
+    if (!photoOverlay || !photoModal || !lightboxFigure) return;
 
-// Close modal on Escape key press
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !photoOverlay.hidden) {
-    closeModal();
+    currentPhotoIndex = photoThumbList.indexOf(button);
+    if (currentPhotoIndex < 0) return;
+
+    renderPhoto(button);
+
+    if (photoOverlay.hidden) {
+      photoReturnFocus = button;
+      savedPhotoBodyPadding = document.body.style.paddingRight;
+
+      // Measure BEFORE showing the overlay or locking page scrolling.
+      const scrollbarWidth = getScrollbarWidth();
+      const currentPadding =
+        parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+
+      document.body.style.paddingRight =
+        currentPadding + scrollbarWidth + 'px';
+      document.body.classList.add('modal-open');
+
+      photoOverlay.hidden = false;
+      closeLightboxBtn.focus({ preventScroll: true });
+    }
   }
-});
 
-// IntersectionObserver for reveal animations on scroll
-const revealItems = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'riseIn 0.7s ease both';
-        observer.unobserve(entry.target);
+  function navigatePhoto(direction) {
+    if (photoOverlay.hidden || photoThumbList.length < 2) return;
+
+    currentPhotoIndex =
+      (currentPhotoIndex + direction + photoThumbList.length) %
+      photoThumbList.length;
+
+    renderPhoto(photoThumbList[currentPhotoIndex]);
+  }
+
+  function closeModal() {
+    if (!photoOverlay || photoOverlay.hidden) return;
+
+    photoOverlay.hidden = true;
+    document.body.style.paddingRight = savedPhotoBodyPadding;
+    document.body.classList.remove('modal-open');
+    lightboxFigure.innerHTML = '';
+
+    photoReturnFocus?.focus({ preventScroll: true });
+  }
+
+  photoThumbList.forEach((thumb) => {
+    thumb.addEventListener('click', () => openLightbox(thumb));
+  });
+
+  previousImageBtn?.addEventListener('click', () => navigatePhoto(-1));
+  nextImageBtn?.addEventListener('click', () => navigatePhoto(1));
+
+  // Hide navigation if there is only one photograph.
+  if (previousImageBtn) previousImageBtn.hidden = photoThumbList.length < 2;
+  if (nextImageBtn) nextImageBtn.hidden = photoThumbList.length < 2;
+
+  closeLightboxBtn.addEventListener('click', closeModal);
+
+  photoOverlay.addEventListener('click', (event) => {
+    if (event.target === photoOverlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (photoOverlay.hidden) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+
+    const isEditing = event.target instanceof Element &&
+      event.target.closest('input, textarea, select, [contenteditable="true"]');
+
+    if (!isEditing && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
+      event.preventDefault();
+      navigatePhoto(event.key === 'ArrowLeft' ? -1 : 1);
+      return;
+    }
+
+    // Keep keyboard focus inside the open dialog.
+    if (event.key === 'Tab') {
+      const focusable = Array.from(
+        photoModal.querySelectorAll(
+          'button:not([disabled]), a[href], input:not([disabled]), ' +
+          'select:not([disabled]), textarea:not([disabled]), ' +
+          '[tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((element) => element.getClientRects().length > 0);
+
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || !photoModal.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey &&
+                 (active === last || !photoModal.contains(active))) {
+        event.preventDefault();
+        first.focus();
       }
-    });
-  },
-  { threshold: 0.15 }
-);
+    }
+  });
 
-revealItems.forEach((item) => observer.observe(item));
+  // Existing scroll-reveal behavior.
+  const revealItems = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'riseIn 0.7s ease backwards';
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+  }
