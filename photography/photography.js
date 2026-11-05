@@ -12,14 +12,21 @@ const thumbs = document.querySelectorAll('.thumb');
 
 // Artwork library: keys map to large image HTML strings or SVGs
 const artworkLibrary = {
-  'art-1': `<img src="../images/moss-tree.jpg" alt="A moss-covered tree" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-2': `<img src="path/to/your-image2-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-3': `<img src="path/to/your-image3-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-4': `<img src="path/to/your-image4-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-5': `<img src="path/to/your-image5-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-6': `<img src="path/to/your-image6-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-7': `<img src="path/to/your-image7-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
-  'art-8': `<img src="path/to/your-image8-large.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-1': `<img src="../images/photography/moss-tree.jpg" alt="A moss-covered tree" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-2': `<img src="../images/photography/a-reflective-world.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-3': `<img src="../images/photography/hanging-lanterns.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-4': `<img src="../images/photography/edinburgh-christmas-market.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-5': `<img src="../images/photography/sunflower-garden.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-6': `<img src="../images/photography/fjord-sunset.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-7': `<img src="../images/photography/bergen-in-summer.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-8': `<img src="../images/photography/curious-cat.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-9': `<img src="../images/photography/dry-river-drain.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-10': `<img src="../images/photography/glowing-mushrooms.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-11': `<img src="../images/photography/cold-smile.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-12': `<img src="../images/photography/sleeping-bee.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-13': `<img src="../images/photography/cityscape-dawn.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-14': `<img src="../images/photography/misty-tower.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
+  'art-15': `<img src="../images/photography/norwegian-aurora.jpg" alt="Another large image" style="width: 100%; height: auto; border-radius: 28px;" />`,
   // Add other artworks similarly...
 };
 
